@@ -57,7 +57,7 @@ public class EmployeeService : IEmployeeService
             .FirstAsync(x => x.Id == id);
     }
 
-    public async Task AddEmployee(string firstName, string lastName, Guid? managerId, IList<Guid> roleIds)
+    public async Task<Guid> AddEmployee(string firstName, string lastName, Guid? managerId, IList<Guid> roleIds)
     {
         var employeeId = GenerateUniqueEmployeeId();
         var newEmployee = new Employee
@@ -80,6 +80,8 @@ public class EmployeeService : IEmployeeService
 
         _context.Employees.Add(newEmployee);
         await _context.SaveChangesAsync();
+
+        return newEmployee.Id;
     }
 
     public Task UpdateEmployee(Guid id, string firstName, string lastName)

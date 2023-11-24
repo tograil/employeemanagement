@@ -54,9 +54,12 @@ namespace EmployeeManagement.Api.Controllers
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public async Task Post([FromBody] NewEmployeeModel value)
+        public async Task<CreatedEmployee> Post([FromBody] NewEmployeeModel value)
         {
-            await _employeeService.AddEmployee(value.FirstName, value.LastName, value.ManagerId, value.Roles);
+            return new CreatedEmployee
+            {
+                Id = await _employeeService.AddEmployee(value.FirstName, value.LastName, value.ManagerId, value.Roles)
+            };
         }
 
         // PUT api/<EmployeeController>/5

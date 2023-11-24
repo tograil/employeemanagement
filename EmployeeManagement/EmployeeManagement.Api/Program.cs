@@ -19,6 +19,8 @@ builder.Services.AddScoped<IRolesService, RolesService>();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(MyAllowSpecificOrigins,
@@ -47,3 +49,5 @@ app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
