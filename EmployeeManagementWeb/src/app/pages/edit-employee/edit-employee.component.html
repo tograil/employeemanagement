@@ -1,0 +1,10 @@
+<h1 id="tableLabel">Edit Employee</h1>
+
+<div>
+    <input class="form-control" type="text" placeholder="First Name" aria-label="First Name" [(ngModel)]="employee.firstName">
+    <br>
+    <input class="form-control" type="text" placeholder="Last Name" aria-label="Last Name" [(ngModel)]="employee.lastName">
+</div>
+<br><br>
+<input type="button" value="Save" (click)="saveEmployee()" class="btn btn-dark">
+<input type="button" value="Cancel" [routerLink]="['/']" class="btn btn-dark">

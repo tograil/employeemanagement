@@ -11,4 +11,5 @@ public interface IEmployeeService
 
     Task<Employee> GetEmployeeById(Guid id);
     Task AddEmployee(string firstName, string lastName, Guid? managerId, IList<Guid> roleIds);
+    Task UpdateEmployee(Guid id, string firstName, string lastName);
 }

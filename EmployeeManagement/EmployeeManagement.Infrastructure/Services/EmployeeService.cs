@@ -3,6 +3,7 @@ using EmployeeManagement.Domain.Models;
 using EmployeeManagement.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
+using EmployeeManagement.Domain.Utils;
 
 namespace EmployeeManagement.Infrastructure.Services;
 
@@ -58,11 +59,13 @@ public class EmployeeService : IEmployeeService
 
     public async Task AddEmployee(string firstName, string lastName, Guid? managerId, IList<Guid> roleIds)
     {
+        var employeeId = GenerateUniqueEmployeeId();
         var newEmployee = new Employee
         {
             FirstName = firstName,
             LastName = lastName,
             ManagerId = managerId,
+            EmployeeId = employeeId,
             Roles = new List<Role>()
         };
 
@@ -77,5 +80,25 @@ public class EmployeeService : IEmployeeService
 
         _context.Employees.Add(newEmployee);
         await _context.SaveChangesAsync();
+    }
+
+    public Task UpdateEmployee(Guid id, string firstName, string lastName)
+    {
+        var employee = _context.Employees.First(x => x.Id == id);
+        employee.FirstName = firstName;
+        employee.LastName = lastName;
+
+        return _context.SaveChangesAsync();
+    }
+
+    private string GenerateUniqueEmployeeId()
+    {
+        string employeeId;
+        do
+        {
+            employeeId = EmployeeUtils.GenerateEmployeeId();
+        } while (_context.Employees.Any(e => e.EmployeeId == employeeId));
+
+        return employeeId;
     }
 }

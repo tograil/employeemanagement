@@ -43,7 +43,7 @@ public class EmployeeContext : DbContext
                 new Role { Id = Guid.NewGuid(), Name = "Support" },
                 new Role { Id = Guid.NewGuid(), Name = "Analyst" },
                 new Role { Id = Guid.NewGuid(), Name = "Sales" },
-                new Role { Id = Guid.NewGuid(), Name = "Accounteing" }
+                new Role { Id = Guid.NewGuid(), Name = "Accounting" }
               );
     }
 }
